@@ -12,12 +12,16 @@
     font-size: .85em;
     letter-spacing: .1em;
     text-transform: uppercase;
+   
 }
 table {
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
     border-collapse: collapse;
     table-layout: fixed;
     width: 100%;
+    margin:auto;
+
+    
 }
 table caption {
     font-size: 1.5em;
@@ -32,7 +36,7 @@ table tr:nth-child(even) {
 }
 table th, table td {
     padding: .625em;
-    text-align: left;
+    text-align: center;
 }
 table td {
     white-space: nowrap;
@@ -41,8 +45,10 @@ table td {
 }
 .table-overflow {
     height: 500px;
-    overflow-x: hidden;
+    width: 1200px;
+    overflow-x: scroll;
     overflow-y: scroll;
+    margin:auto;
 }
 </style>
 </head>
@@ -53,26 +59,27 @@ table td {
 <div class="container mt-5 mb-5">
   <h3>Create Records</h3>
   <form autocomplete="off" action="/action_page.php"></form>
+  
   <form id="formCreate" class="row" >
     
-    <div class="form-group col-2">
+    <div class="form-group col-3">
       <label>Name</label>
       <input class="form-control form-control-sm" name="name" type="text" >
     </div>
-    <div class="form-group col-2">
+    <div class="form-group col-3">
       <label>Email</label>
       <input class="form-control form-control-sm" name="email" type="text" >
     </div>
-    <div class="form-group col-2">
+    <div class="form-group col-3">
       <label>Street</label>
       <input class="form-control form-control-sm" name="street" type="text" >
     </div>
-    <div class="form-group col-2">
+    <div class="form-group col-3">
       <label>Dom</label>
       <input class="form-control form-control-sm" name="dom" type="text" >
     </div>
     
-    <div class="form-group col-2">
+    <div class="form-group col-3">
       <label for="Тип улицы">Тип улицы</label>
       <select class="form-control form-control-sm" name="tipstreet" type="text" id="tipstreet">
         <option></option>
@@ -90,7 +97,7 @@ table td {
     </div>
 
     
-<div class="form-group Autocomplete col-2">
+<div class="form-group Autocomplete col-3">
 <label for="Улица">Улица</label>
     <input class="form-control form-control-sm" id="myInput2" type="text" name="myCountry3" placeholder="Улица">
 </div>
@@ -137,32 +144,32 @@ table td {
   <form id="formUpdate" >
     <h3>Update Record</h3>
     <div class="row">
-      <div class="form-group col-3">
+      <div class="form-group col-1">
         <label>TID</label>
-        <input class="form-control form-control-sm" name="tid" type="text" id="tid">
+        <input class="form-control form-control-sm" name="tid" type="text" id="tid" readonly>
       </div>    
-      <div class="form-group col-3">
+      <div class="form-group col-2">
         <label>Name</label>
         <input class="form-control form-control-sm" name="name" type="text" id="name" >
       </div>
-      <div class="form-group col-3">
+      <div class="form-group col-2">
         <label>Email</label>
         <input class="form-control form-control-sm" name="email" type="text" id="email">
       </div>
         
-      <div class="form-group col-3">
+      <div class="form-group col-2">
         <label>Street</label>
         <input class="form-control form-control-sm" name="street" type="text" id="street">
       </div>
 
-      <div class="form-group col-3">
+      <div class="form-group col-2">
         <label>Dom</label>
         <input class="form-control form-control-sm" name="dom" type="text" id="dom">
       </div>
 
       <div class="form-group col-3">
       <label for="Тип улицы">Тип улицы</label>
-      <select class="form-control" name="tipstreet" type="text" id="tipstreet">
+      <select class="form-control form-control-sm" name="tipstreet" type="text" id="tipstreet">
         <option></option>
         <option>вул.</option>
         <option>провулок</option>
@@ -178,7 +185,7 @@ table td {
     </div>
     <div class="form-group Autocomplete col-3">
       <label for="Улица">Улица</label>
-          <input class="form-control" id="myInput3" type="text" name="myCountry3" placeholder="Улица">
+          <input class="form-control form-control-sm" id="myInput3" type="text" name="myCountry3" placeholder="Улица">
       </div>
       <div class="form-group col-12">
         <input type="hidden" name="action" value="update">
@@ -345,6 +352,7 @@ autocomplete(document.getElementById("myInput3"), countries);
 
         $(window).load(function () {
             $("#btnRetrieve").click();
+
         })
         
         jQuery( document ).ready(function( $ ) {    
@@ -417,6 +425,7 @@ autocomplete(document.getElementById("myInput3"), countries);
        request.always(function () {
            // reenable the inputs
            $inputs.prop("disabled", false);
+           
        });
  
        // prevent default posting of form
@@ -528,6 +537,7 @@ autocomplete(document.getElementById("myInput3"), countries);
            // Disabled form elements will not be serialized.
            
            $inputs.prop("disabled", true);
+            
            resetForm();
            
            $('#messageUpdate').text('Updating data...');
@@ -669,7 +679,7 @@ autocomplete(document.getElementById("myInput3"), countries);
                 $("#formUpdate #dom").val(arrRecord[5]);
                 $("#formUpdate #tipstreet").val(arrRecord[6]);
                 $("#formUpdate #myInput3").val(arrRecord[7]);
-                
+                    
                 
 
 
@@ -678,6 +688,7 @@ autocomplete(document.getElementById("myInput3"), countries);
                    //formUpdate.scrollIntoView(true);
                    $('#formUpdate')[0].scrollIntoView();
                //alert(address.join('\n'));
+          
                
         };
 
