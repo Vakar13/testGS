@@ -1,0 +1,727 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Sheet 1</title>
+<link href="css/bootstrap-reboot.css" rel="stylesheet" />
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<style>
+#datatable tbody > tr:first-child td, #datatable tbody > tr:first-child th {
+    font-weight: bold;
+    background: #d1ecf1;
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+   
+}
+table {
+    border: 5px solid #ccc;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin:auto;
+
+    
+}
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+}
+table tr {
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+table th, table td {
+    padding: .625em;
+    text-align: center;
+}
+table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.table-overflow {
+    height: 500px;
+    width: 1200px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    margin:auto;
+}
+</style>
+</head>
+
+<body>
+<script  data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   
+<div class="container mt-5 mb-5">
+  <h3>Create Records</h3>
+  <form autocomplete="off" action="/action_page.php"></form>
+  
+  <form id="formCreate" class="row" >
+    
+    <div class="form-group col-3">
+      <label>Name</label>
+      <input class="form-control form-control-sm" name="name" type="text" >
+    </div>
+    <div class="form-group col-3">
+      <label>Email</label>
+      <input class="form-control form-control-sm" name="email" type="text" >
+    </div>
+    <div class="form-group col-3">
+      <label>Street</label>
+      <input class="form-control form-control-sm" name="street" type="text" >
+    </div>
+    <div class="form-group col-3">
+      <label>Dom</label>
+      <input class="form-control form-control-sm" name="dom" type="text" >
+    </div>
+    
+    <div class="form-group col-3">
+      <label for="Тип улицы">Тип улицы</label>
+      <select class="form-control form-control-sm" name="tipstreet" type="text" id="tipstreet">
+        <option></option>
+        <option>вул.</option>
+        <option>провулок</option>
+        <option>проспект</option>
+        <option>проїзд</option>
+        <option>шосе</option>
+        <option>в'їзд</option>
+        <option>набережна</option>
+        <option>майдан</option>
+        <option>бульвар</option>
+        <option>узвіз</option>
+      </select>
+    </div>
+
+    
+<div class="form-group Autocomplete col-3">
+<label for="Улица">Улица</label>
+    <input class="form-control form-control-sm" id="myInput2" type="text" name="myCountry3" placeholder="Улица">
+</div>
+
+
+
+
+    <div class="col-12">
+      <input type="hidden" name="action" value="create">
+      <!--               <input type="hidden" name="SHEET_NAME" value="Sheet1">-->
+      <p id="result"></p>
+      <input type="submit" value="Submit Data" class="btn btn-primary" />
+    </div>
+  </form>
+  <hr/>
+</div>
+
+<div class="container mt-5 mb-5">
+  <form id="formRetrieve" >
+    <h3>Retrieve Records</h3>
+    <div class="form-group">
+      <input type="hidden" name="action" value="retrieve">
+      <input class="btn btn-warning" id="btnRetrieve" type="submit" value="Retrieve" />
+    </div>
+    <div class="row">
+      <div class="form-group col-12">
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+      </div>
+    </div>
+  </form>
+</div>
+<div class="table-overflow">
+  <div class="table-responsive">
+    <table id="datatable" class="table table-hover">
+    </table>
+  </div>
+</div>
+
+<div id="messageRetrieve"></div>
+
+<div class="container mt-5 mb-5">
+  
+<hr class="mb-5"/>
+  <form id="formUpdate" >
+    <h3>Update Record</h3>
+    <div class="row">
+      <div class="form-group col-1">
+        <label>TID</label>
+        <input class="form-control form-control-sm" name="tid" type="text" id="tid" readonly>
+      </div>    
+      <div class="form-group col-2">
+        <label>Name</label>
+        <input class="form-control form-control-sm" name="name" type="text" id="name" >
+      </div>
+      <div class="form-group col-2">
+        <label>Email</label>
+        <input class="form-control form-control-sm" name="email" type="text" id="email">
+      </div>
+        
+      <div class="form-group col-2">
+        <label>Street</label>
+        <input class="form-control form-control-sm" name="street" type="text" id="street">
+      </div>
+
+      <div class="form-group col-2">
+        <label>Dom</label>
+        <input class="form-control form-control-sm" name="dom" type="text" id="dom">
+      </div>
+
+      <div class="form-group col-3">
+      <label for="Тип улицы">Тип улицы</label>
+      <select class="form-control form-control-sm" name="tipstreet" type="text" id="tipstreet">
+        <option></option>
+        <option>вул.</option>
+        <option>провулок</option>
+        <option>проспект</option>
+        <option>проїзд</option>
+        <option>шосе</option>
+        <option>в'їзд</option>
+        <option>набережна</option>
+        <option>майдан</option>
+        <option>бульвар</option>
+        <option>узвіз</option>
+      </select>
+    </div>
+    <div class="form-group Autocomplete col-3">
+      <label for="Улица">Улица</label>
+          <input class="form-control form-control-sm" id="myInput3" type="text" name="myCountry3" placeholder="Улица">
+      </div>
+      <div class="form-group col-12">
+        <input type="hidden" name="action" value="update">
+        <input class="btn btn-success" type="submit" value="Update" />
+        <p id="messageUpdate"></p>
+      </div>
+    </div>
+  </form>
+  
+  <hr class="mb-5"/>
+  
+  <form id="formDelete" >
+    <h3>Delete Record</h3>
+    <div class="row">
+      <div class="form-group col-3">
+        <label>TID</label>
+        <input class="form-control form-control-sm" name="tid" type="text" id="dtid" disabled="true">
+      </div>
+      <div class="form-group col-3">
+        <label>Name</label>
+        <input class="form-control form-control-sm" name="Name" type="text" id="dname" disabled="true">
+      </div>
+      <div class="form-group col-3">
+        <label>Email</label>
+        <input class="form-control form-control-sm" name="Email" type="text" id="demail" disabled="true">
+      </div>
+      <div class="form-group col-3">
+        <label>Street</label>
+        <input class="form-control form-control-sm" name="Street" type="text" id="dstreet" disabled="true">
+      </div>
+      <div class="form-group col-3">
+        <label>Dom</label>
+        <input class="form-control form-control-sm" name="Dom" type="text" id="ddom" disabled="true">
+      </div>
+      <div class="form-group col-3">
+        <label >Тип улицы</label>
+        <select class="form-control form-control-sm" name="tipstreet" id="dtipstreet" disabled="true">
+          <option></option>
+          <option>вул.</option>
+          <option>провулок</option>
+          <option>проспект</option>
+          <option>проїзд</option>
+          <option>шосе</option>
+          <option>в'їзд</option>
+          <option>набережна</option>
+          <option>майдан</option>
+          <option>бульвар</option>
+          <option>узвіз</option>
+        </select>
+      </div>
+      <div class="form-group col-12">
+        <input type="hidden" name="action" value="delete">
+        <input class="btn btn-danger" type="submit" value="Delete" />
+        <p id="messageDelete"></p>
+      </div>
+    </div>
+  </form>
+</div>
+<script>
+        function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+/*An array containing all the country names in the world:*/
+var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput2"), countries);
+autocomplete(document.getElementById("myInput3"), countries);
+
+
+        $(window).load(function () {
+            $("#btnRetrieve").click();
+
+        })
+        
+        jQuery( document ).ready(function( $ ) {    
+        
+            
+        //CUSTOME SEARCH
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#datatable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        //CUSTOM SEARCH ENDS
+        
+        
+            
+        // variable to hold request
+        var request;
+        // bind to the submit event of our form
+           $("#formCreate").submit(function(event){
+       // abort any pending request
+       if (request) {
+           request.abort();
+       }
+       // setup some local variables
+       var $form = $(this);
+       // let's select and cache all the fields
+       var $inputs = $form.find("input, select, button, textarea");
+       // serialize the data in the form
+       var serializedData = $form.serialize();
+ 
+       // let's disable the inputs for the duration of the ajax request
+       // Note: we disable elements AFTER the form data has been serialized.
+       // Disabled form elements will not be serialized.
+       $inputs.prop("disabled", true);
+       $('#result').text('Sending data...');
+               
+               
+ 
+       // fire off the request to /form.php
+       request = $.ajax({
+           url: "https://script.google.com/macros/s/AKfycbzl21qlM0hfF4_xY2bnGSTyDtRtDK5n61xmYqYjTGDc4cX1ffA/exec",
+           type: "post",
+           data: serializedData
+       });
+ 
+       // callback handler that will be called on success
+       request.done(function (response, textStatus, jqXHR){
+           // log a message to the console
+           $('#result').html('<a href="https://docs.google.com/spreadsheets/d/1a2bzkKYcPWLz7FemdHlAs4R4w-MNWsvQIhKybnhfr5o/edit#gid=0" target="_blank">Success - see Google Sheet</a>');
+     console.log("Created.");
+     //console.log(response);
+     //console.log(textStatus);
+     //console.log(jqXHR);
+     resetForm();
+     $("#btnRetrieve").click();
+       });
+ 
+       // callback handler that will be called on failure
+       request.fail(function (jqXHR, textStatus, errorThrown){
+           // log the error to the console
+           console.error(
+               "The following error occured: "+
+               textStatus, errorThrown
+           );
+       });
+ 
+       // callback handler that will be called regardless
+       // if the request failed or succeeded
+       request.always(function () {
+           // reenable the inputs
+           $inputs.prop("disabled", false);
+           
+       });
+ 
+       // prevent default posting of form
+       event.preventDefault();
+   });
+
+
+           $("#formRetrieve").submit(function(event){
+               // abort any pending request
+               if (request) {
+                   request.abort();
+               }
+               // setup some local variables
+               var $form = $(this);
+               // let's select and cache all the fields
+               var $inputs = $form.find("input, select, button, textarea");
+               // serialize the data in the form
+               var serializedData = $form.serialize();
+
+               // let's disable the inputs for the duration of the ajax request
+               // Note: we disable elements AFTER the form data has been serialized.
+               // Disabled form elements will not be serialized.
+               $inputs.prop("disabled", true);
+               resetForm();
+               $('#messageRetrieve').text('Requesting data...');
+                        $('#datatable').text("");
+
+
+               // fire off the request to /form.php
+               request = $.ajax({
+                   url: "https://script.google.com/macros/s/AKfycbzl21qlM0hfF4_xY2bnGSTyDtRtDK5n61xmYqYjTGDc4cX1ffA/exec",
+                   type: "post",
+                   data: serializedData
+               });
+
+               // callback handler that will be called on success
+               request.done(function (response, textStatus, jqXHR){
+                   // log a message to the console
+                   $('#result').html('<a href="https://docs.google.com/spreadsheets/d/1a2bzkKYcPWLz7FemdHlAs4R4w-MNWsvQIhKybnhfr5o/edit#gid=0" target="_blank">Success - see Google Sheet</a>');
+             console.log("Retrieved.");
+             //console.log(response);
+             //console.log(textStatus);
+             //console.log(jqXHR);
+             var data = response.values;
+             //console.log(data);    
+
+            var trHTML ="";
+
+           $.each(data, function (i, item) {
+             var tdHTML="";  
+             //prepare first two columns
+             if (i==0){
+               tdHTML= "<td>Delete</td><td>Edit</td>" + tdHTML;
+               tdHTML=tdHTML.replace(/td>/gi,"th>");
+             }else{
+               tdHTML+= "<td><button onclick='recordDelete(this)' >delete</button></td>";
+               tdHTML+= "<td><button onclick='recordEdit(this)' >edit</button></td>";
+              }
+             //prepare remaining columns
+             for (j = 0; j < item.length; j++) {
+               tdHTML += "<td>" + item[j] + "</td>";
+               
+             }
+             trHTML += "<tr>" + tdHTML + "</tr>";
+             
+           }); //end each records
+
+           //append records to table element
+           $('#datatable').append(trHTML);
+           //reset
+           $('#messageRetrieve').text('');
+        $('#messageRetrieve')[0].scrollIntoView(false);
+               });
+
+               // callback handler that will be called on failure
+               request.fail(function (jqXHR, textStatus, errorThrown){
+                   // log the error to the console
+                   console.error(
+                       "The following error occured: "+
+                       textStatus, errorThrown
+                   );
+               });
+
+               // callback handler that will be called regardless
+               // if the request failed or succeeded
+               request.always(function () {
+                   // reenable the inputs
+                   $inputs.prop("disabled", false);
+               });
+
+               // prevent default posting of form
+               event.preventDefault();
+   });
+
+    $("#formUpdate").submit(function(event){ 
+           // abort any pending request
+           if (request) {
+               request.abort();
+           }
+           // setup some local variables
+           var $form = $(this);
+           // let's select and cache all the fields
+           var $inputs = $form.find("input, select, button, textarea");
+           // serialize the data in the form
+           var serializedData = $form.serialize();
+        
+           // let's disable the inputs for the duration of the ajax request
+           // Note: we disable elements AFTER the form data has been serialized.
+           // Disabled form elements will not be serialized.
+           
+           $inputs.prop("disabled", true);
+            
+           resetForm();
+           
+           $('#messageUpdate').text('Updating data...');
+
+
+           // fire off the request to /form.php
+//           request = $.ajax({
+//               url: "https://script.google.com/macros/s/AKfycbzl21qlM0hfF4_xY2bnGSTyDtRtDK5n61xmYqYjTGDc4cX1ffA/exec",
+//               type: "post",
+//               data: serializedData
+//           });
+           request = $.ajax({
+               url: "https://script.google.com/macros/s/AKfycbzl21qlM0hfF4_xY2bnGSTyDtRtDK5n61xmYqYjTGDc4cX1ffA/exec",
+               type: "post",
+               data: serializedData,
+           });
+        
+
+ 
+            // callback handler that will be called on success
+            request.done(function (response, textStatus, jqXHR){
+           // log a message to the console
+           $('#result').html('<a href="https://docs.google.com/spreadsheets/d/18wg3b-rBhTBFvr-bBmyviwAUBVXqsEPfYQzulSSloBs/edit#gid=0" target="_blank">Success - see Google Sheet</a>');
+             console.log("Updated.");
+             //console.log(response);
+             //console.log(textStatus);
+             //console.log(jqXHR);
+             resetForm();
+             $('#messageUpdate').text('');
+             $("#btnRetrieve").click();
+
+               });
+
+ 
+           // callback handler that will be called on failure
+           request.fail(function (jqXHR, textStatus, errorThrown){
+               // log the error to the console
+               console.error(
+                   "The following error occured: "+
+                   textStatus, errorThrown
+               );
+           }); 
+
+
+           // callback handler that will be called regardless
+           // if the request failed or succeeded
+           request.always(function () {
+               // reenable the inputs
+              
+               $inputs.prop("disabled", false);
+               $("#formUpdate tid").prop("disabled", true);       
+
+           });  
+            
+           // prevent default posting of form
+           event.preventDefault();   
+          
+   });
+
+
+            
+            
+    $("#formDelete").submit(function(event){
+               
+               
+               
+       // abort any pending request
+       if (request) {
+           request.abort();
+       }
+       // setup some local variables
+       var $form = $(this);
+       // let's select and cache all the fields
+       var $inputs = $form.find("input, select, button, textarea");
+       // serialize the data in the form
+       var serializedData = $form.serialize();
+
+       // let's disable the inputs for the duration of the ajax request
+       // Note: we disable elements AFTER the form data has been serialized.
+       // Disabled form elements will not be serialized.
+       $inputs.prop("disabled", true);
+       resetForm();
+       $('#messageDelete').text('Deleting data...');
+ 
+       // fire off the request to /form.php
+       request = $.ajax({
+           url: "https://script.google.com/macros/s/AKfycbzl21qlM0hfF4_xY2bnGSTyDtRtDK5n61xmYqYjTGDc4cX1ffA/exec",
+           type: "post",
+           data: serializedData
+       });
+ 
+       // callback handler that will be called on success
+       request.done(function (response, textStatus, jqXHR){
+           // log a message to the console
+           $('#result').html('<a href="https://docs.google.com/spreadsheets/d/1a2bzkKYcPWLz7FemdHlAs4R4w-MNWsvQIhKybnhfr5o/edit#gid=0" target="_blank">Success - see Google Sheet</a>');
+            //     console.log("Deleted.");
+                 console.log(response);
+            //     console.log(textStatus);
+            //     console.log(jqXHR);
+                 resetForm();
+                 $('#messageDelete').text('');
+                 $("#btnRetrieve").click();
+       });
+ 
+       // callback handler that will be called on failure
+       request.fail(function (jqXHR, textStatus, errorThrown){
+           // log the error to the console
+           console.error(
+               "The following error occured: "+
+               textStatus, errorThrown
+           );
+       });
+ 
+       // callback handler that will be called regardless
+       // if the request failed or succeeded
+       request.always(function () {
+           // reenable the inputs
+           $inputs.prop("disabled", false);
+       });
+ 
+       // prevent default posting of form
+       event.preventDefault();
+   });
+
+
+ });
+
+        function recordEdit(param) {
+            resetForm();
+            var arrRecord=[];
+            $(param).closest('tr').find('td').not(':first').each(function() {
+                   //var textval = $(this).text();
+                    arrRecord.push( $(this).text());
+              });
+                $("#formUpdate #tid").val(arrRecord[1]);
+                $("#formUpdate #name").val(arrRecord[2]);
+                $("#formUpdate #email").val(arrRecord[3]);
+                $("#formUpdate #street").val(arrRecord[4]);
+                $("#formUpdate #dom").val(arrRecord[5]);
+                $("#formUpdate #tipstreet").val(arrRecord[6]);
+                $("#formUpdate #myInput3").val(arrRecord[7]);
+                    
+                
+
+
+             //window.location.hash = '#formUpdate';
+                   // var formUpdate = document.getElementById ("formUpdate");
+                   //formUpdate.scrollIntoView(true);
+                   $('#formUpdate')[0].scrollIntoView();
+               //alert(address.join('\n'));
+          
+               
+        };
+
+        function recordDelete(param) {
+        resetForm();
+        var arrRecord=[];
+        $(param).closest('tr').find('td').not(':first').each(function() {
+               //var textval = $(this).text();
+              arrRecord.push( $(this).text());
+          });
+            $("#formDelete #dtid").val(arrRecord[1]);
+            $("#formDelete #dname").val(arrRecord[2]);
+            $("#formDelete #demail").val(arrRecord[3]);
+            $("#formDelete #dstreet").val(arrRecord[4]);
+            $("#formDelete #ddom").val(arrRecord[5]);
+            $("#formDelete #dtipstreet").val(arrRecord[6]);
+         
+         //window.location.hash = '#formUpdate';
+               // var formUpdate = document.getElementById ("formUpdate");
+               //formUpdate.scrollIntoView(true);
+               $('#formDelete')[0].scrollIntoView();
+           //alert(address.join('\n'));
+        };
+
+        function resetForm(){
+           $('#formCreate')[0].reset();
+           $('#formUpdate')[0].reset();
+           $("#formUpdate tid").prop("disabled", true);
+           $('#formDelete')[0].reset();
+           $("#formDelete dtid").prop("disabled", true);     
+           $("#formUpdate dname").prop("disabled", true);
+          }
+                
+        </script>
+</body>
+</html>
